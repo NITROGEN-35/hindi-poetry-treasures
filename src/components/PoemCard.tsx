@@ -1,6 +1,9 @@
-import { Heart } from "lucide-react";
+import { Heart, Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Poem } from "@/hooks/usePoems";
+import { usePoemLike, useSavedPoem } from "@/hooks/usePoemActions";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 interface PoemCardProps {
   poem: Poem;
@@ -24,14 +27,41 @@ const categoryColors: Record<string, string> = {
 };
 
 const PoemCard = ({ poem }: PoemCardProps) => {
+  const { user } = useAuth();
+  const { isLiked, toggleLike } = usePoemLike(poem.id);
+  const { isSaved, toggleSave } = useSavedPoem(poem.id);
+
+  const handleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) return toast.error("Please sign in to like poems");
+    toggleLike();
+  };
+
+  const handleSave = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) return toast.error("Please sign in to save poems");
+    toggleSave();
+  };
+
   return (
     <Link
       to={`/poems/${poem.id}`}
       className="bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow cursor-pointer group border border-border/50 block"
     >
-      <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${categoryColors[poem.category] || "bg-secondary text-secondary-foreground"}`}>
-        {poem.category}
-      </span>
+      <div className="flex items-center justify-between">
+        <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${categoryColors[poem.category] || "bg-secondary text-secondary-foreground"}`}>
+          {poem.category}
+        </span>
+        <button
+          onClick={handleSave}
+          className={`p-1 rounded-full transition-colors ${isSaved ? "text-primary" : "text-muted-foreground hover:text-primary"}`}
+          title={isSaved ? "Unsave" : "Save"}
+        >
+          <Bookmark size={14} className={isSaved ? "fill-primary" : ""} />
+        </button>
+      </div>
       <p className="text-sm text-muted-foreground mt-3 line-clamp-2 leading-relaxed">
         {poem.excerpt}
       </p>
@@ -42,10 +72,14 @@ const PoemCard = ({ poem }: PoemCardProps) => {
           </h4>
           <p className="text-xs text-muted-foreground">{poem.poets?.name || "Unknown"}</p>
         </div>
-        <div className="flex items-center gap-1 text-muted-foreground text-xs">
-          <Heart size={12} />
+        <button
+          onClick={handleLike}
+          className={`flex items-center gap-1 text-xs transition-colors ${isLiked ? "text-rose-500" : "text-muted-foreground hover:text-rose-500"}`}
+          title={isLiked ? "Unlike" : "Like"}
+        >
+          <Heart size={12} className={isLiked ? "fill-rose-500" : ""} />
           <span>{poem.likes}</span>
-        </div>
+        </button>
       </div>
     </Link>
   );

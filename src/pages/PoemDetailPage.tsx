@@ -3,10 +3,35 @@ import { ArrowLeft, Heart, Bookmark, Share2, Eye } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePoem } from "@/hooks/usePoems";
+import { usePoemLike, useSavedPoem } from "@/hooks/usePoemActions";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const PoemDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data: poem, isLoading } = usePoem(id || "");
+  const { user } = useAuth();
+  const { isLiked, toggleLike, isToggling: likeToggling } = usePoemLike(id || "");
+  const { isSaved, toggleSave, isToggling: saveToggling } = useSavedPoem(id || "");
+
+  const handleLike = () => {
+    if (!user) return toast.error("Please sign in to like poems");
+    toggleLike();
+  };
+
+  const handleSave = () => {
+    if (!user) return toast.error("Please sign in to save poems");
+    toggleSave();
+  };
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success("Link copied to clipboard!");
+    } catch {
+      toast.error("Failed to copy link");
+    }
+  };
 
   if (isLoading) {
     return (
@@ -72,19 +97,34 @@ const PoemDetailPage = () => {
         </div>
 
         <div className="flex items-center justify-center gap-6">
-          <button className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-            <Heart size={20} />
+          <button
+            onClick={handleLike}
+            disabled={likeToggling}
+            className={`flex items-center gap-2 transition-colors ${
+              isLiked ? "text-rose-500" : "text-muted-foreground hover:text-rose-500"
+            }`}
+          >
+            <Heart size={20} className={isLiked ? "fill-rose-500" : ""} />
             <span className="text-sm">{poem.likes.toLocaleString()}</span>
           </button>
-          <button className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+          <div className="flex items-center gap-2 text-muted-foreground">
             <Eye size={20} />
             <span className="text-sm">{poem.views.toLocaleString()}</span>
+          </div>
+          <button
+            onClick={handleSave}
+            disabled={saveToggling}
+            className={`flex items-center gap-2 transition-colors ${
+              isSaved ? "text-primary" : "text-muted-foreground hover:text-primary"
+            }`}
+          >
+            <Bookmark size={20} className={isSaved ? "fill-primary" : ""} />
+            <span className="text-sm">{isSaved ? "Saved" : "Save"}</span>
           </button>
-          <button className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-            <Bookmark size={20} />
-            <span className="text-sm">Save</span>
-          </button>
-          <button className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+          <button
+            onClick={handleShare}
+            className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+          >
             <Share2 size={20} />
             <span className="text-sm">Share</span>
           </button>
