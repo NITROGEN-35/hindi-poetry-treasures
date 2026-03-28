@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PoemOfTheDay from "@/components/PoemOfTheDay";
 import FeaturedPoem from "@/components/FeaturedPoem";
 import TrendingSection from "@/components/TrendingSection";
