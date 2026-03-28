@@ -14,7 +14,194 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      poem_likes: {
+        Row: {
+          created_at: string
+          id: string
+          poem_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          poem_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          poem_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "poem_likes_poem_id_fkey"
+            columns: ["poem_id"]
+            isOneToOne: false
+            referencedRelation: "poems"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      poems: {
+        Row: {
+          category: Database["public"]["Enums"]["poem_category"]
+          content: string
+          content_hindi: string | null
+          created_at: string
+          display_order: number | null
+          excerpt: string | null
+          id: string
+          is_editor_pick: boolean
+          is_featured: boolean
+          is_poem_of_day: boolean
+          likes: number
+          poet_id: string | null
+          title: string
+          title_hindi: string | null
+          updated_at: string
+          views: number
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["poem_category"]
+          content: string
+          content_hindi?: string | null
+          created_at?: string
+          display_order?: number | null
+          excerpt?: string | null
+          id?: string
+          is_editor_pick?: boolean
+          is_featured?: boolean
+          is_poem_of_day?: boolean
+          likes?: number
+          poet_id?: string | null
+          title: string
+          title_hindi?: string | null
+          updated_at?: string
+          views?: number
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["poem_category"]
+          content?: string
+          content_hindi?: string | null
+          created_at?: string
+          display_order?: number | null
+          excerpt?: string | null
+          id?: string
+          is_editor_pick?: boolean
+          is_featured?: boolean
+          is_poem_of_day?: boolean
+          likes?: number
+          poet_id?: string | null
+          title?: string
+          title_hindi?: string | null
+          updated_at?: string
+          views?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "poems_poet_id_fkey"
+            columns: ["poet_id"]
+            isOneToOne: false
+            referencedRelation: "poets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      poets: {
+        Row: {
+          bio: string | null
+          bio_hindi: string | null
+          birth_year: number | null
+          created_at: string
+          death_year: number | null
+          id: string
+          image_url: string | null
+          name: string
+          name_hindi: string | null
+        }
+        Insert: {
+          bio?: string | null
+          bio_hindi?: string | null
+          birth_year?: number | null
+          created_at?: string
+          death_year?: number | null
+          id?: string
+          image_url?: string | null
+          name: string
+          name_hindi?: string | null
+        }
+        Update: {
+          bio?: string | null
+          bio_hindi?: string | null
+          birth_year?: number | null
+          created_at?: string
+          death_year?: number | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          name_hindi?: string | null
+        }
+        Relationships: []
+      }
+      reading_history: {
+        Row: {
+          id: string
+          poem_id: string
+          read_at: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          poem_id: string
+          read_at?: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          poem_id?: string
+          read_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reading_history_poem_id_fkey"
+            columns: ["poem_id"]
+            isOneToOne: false
+            referencedRelation: "poems"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      saved_poems: {
+        Row: {
+          created_at: string
+          id: string
+          poem_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          poem_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          poem_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_poems_poem_id_fkey"
+            columns: ["poem_id"]
+            isOneToOne: false
+            referencedRelation: "poems"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +210,21 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      poem_category:
+        | "Love"
+        | "Nature"
+        | "Life"
+        | "Friendship"
+        | "Spirituality"
+        | "Patriotic"
+        | "Romance"
+        | "Philosophy"
+        | "Social"
+        | "Modern"
+        | "Inspiration"
+        | "Empowerment"
+        | "Poetry"
+        | "Classic"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +351,23 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      poem_category: [
+        "Love",
+        "Nature",
+        "Life",
+        "Friendship",
+        "Spirituality",
+        "Patriotic",
+        "Romance",
+        "Philosophy",
+        "Social",
+        "Modern",
+        "Inspiration",
+        "Empowerment",
+        "Poetry",
+        "Classic",
+      ],
+    },
   },
 } as const
