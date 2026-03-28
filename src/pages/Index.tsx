@@ -6,9 +6,12 @@ import CollectionSection from "@/components/CollectionSection";
 import PoemSection from "@/components/PoemSection";
 import EditorPicks from "@/components/EditorPicks";
 import CategoryBrowse from "@/components/CategoryBrowse";
-import { recentPoems, lovePoems } from "@/data/poems";
+import { usePoems } from "@/hooks/usePoems";
 
 const Index = () => {
+  const { data: recentPoems, isLoading: recentLoading } = usePoems({ sort: "recent", limit: 4 });
+  const { data: lovePoems, isLoading: loveLoading } = usePoems({ category: "Love", limit: 4 });
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -16,8 +19,8 @@ const Index = () => {
       <FeaturedPoem />
       <TrendingSection />
       <CollectionSection />
-      <PoemSection title="Recently Added" poems={recentPoems} viewAllLink="/poems?sort=recent" />
-      <PoemSection title="Love & Romance" poems={lovePoems} viewAllLink="/poems?category=romance" />
+      <PoemSection title="Recently Added" poems={recentPoems} isLoading={recentLoading} viewAllLink="/poems?sort=recent" />
+      <PoemSection title="Love & Romance" poems={lovePoems} isLoading={loveLoading} viewAllLink="/poems?category=Love" />
       <EditorPicks />
       <CategoryBrowse />
     </div>
