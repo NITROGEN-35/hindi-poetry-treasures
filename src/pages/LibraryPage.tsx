@@ -1,5 +1,6 @@
 import { BookOpen } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PoemCard from "@/components/PoemCard";
 import { usePoems } from "@/hooks/usePoems";
 import { Constants } from "@/integrations/supabase/types";
@@ -67,6 +68,7 @@ const LibraryPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

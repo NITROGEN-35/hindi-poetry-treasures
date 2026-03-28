@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, User } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PoemCard from "@/components/PoemCard";
 import { usePoet, usePoetPoems } from "@/hooks/usePoets";
 
@@ -87,6 +88,7 @@ const PoetDetailPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

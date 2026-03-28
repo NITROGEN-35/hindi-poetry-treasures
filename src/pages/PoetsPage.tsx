@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { User } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { usePoets } from "@/hooks/usePoets";
 
 const PoetsPage = () => {
@@ -57,6 +58,7 @@ const PoetsPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PoemOfTheDay from "@/components/PoemOfTheDay";
 import FeaturedPoem from "@/components/FeaturedPoem";
 import TrendingSection from "@/components/TrendingSection";
@@ -23,6 +24,7 @@ const Index = () => {
       <PoemSection title="Love & Romance" poems={lovePoems} isLoading={loveLoading} viewAllLink="/poems?category=Love" />
       <EditorPicks />
       <CategoryBrowse />
+      <Footer />
     </div>
   );
 };

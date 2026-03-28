@@ -9,6 +9,7 @@ import PoemDetailPage from "./pages/PoemDetailPage.tsx";
 import PoetsPage from "./pages/PoetsPage.tsx";
 import PoetDetailPage from "./pages/PoetDetailPage.tsx";
 import LibraryPage from "./pages/LibraryPage.tsx";
+import AuthPage from "./pages/AuthPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/poets" element={<PoetsPage />} />
           <Route path="/poets/:id" element={<PoetDetailPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PoemCard from "@/components/PoemCard";
 import { usePoems } from "@/hooks/usePoems";
 import { Constants } from "@/integrations/supabase/types";
@@ -115,6 +116,7 @@ const PoemsPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

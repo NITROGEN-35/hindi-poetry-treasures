@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Heart, Bookmark, Share2, Eye } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { usePoem } from "@/hooks/usePoems";
 
 const PoemDetailPage = () => {
@@ -89,6 +90,7 @@ const PoemDetailPage = () => {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
