@@ -1,5 +1,6 @@
 import { Heart } from "lucide-react";
-import type { Poem } from "@/data/poems";
+import { Link } from "react-router-dom";
+import type { Poem } from "@/hooks/usePoems";
 
 interface PoemCardProps {
   poem: Poem;
@@ -16,11 +17,18 @@ const categoryColors: Record<string, string> = {
   Poetry: "bg-blue-100 text-blue-700",
   Classic: "bg-stone-100 text-stone-700",
   Patriotic: "bg-yellow-100 text-yellow-700",
+  Philosophy: "bg-indigo-100 text-indigo-700",
+  Friendship: "bg-cyan-100 text-cyan-700",
+  Social: "bg-teal-100 text-teal-700",
+  Modern: "bg-fuchsia-100 text-fuchsia-700",
 };
 
 const PoemCard = ({ poem }: PoemCardProps) => {
   return (
-    <div className="bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow cursor-pointer group border border-border/50">
+    <Link
+      to={`/poems/${poem.id}`}
+      className="bg-card rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow cursor-pointer group border border-border/50 block"
+    >
       <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${categoryColors[poem.category] || "bg-secondary text-secondary-foreground"}`}>
         {poem.category}
       </span>
@@ -32,14 +40,14 @@ const PoemCard = ({ poem }: PoemCardProps) => {
           <h4 className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
             {poem.title}
           </h4>
-          <p className="text-xs text-muted-foreground">{poem.poet}</p>
+          <p className="text-xs text-muted-foreground">{poem.poets?.name || "Unknown"}</p>
         </div>
         <div className="flex items-center gap-1 text-muted-foreground text-xs">
           <Heart size={12} />
           <span>{poem.likes}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

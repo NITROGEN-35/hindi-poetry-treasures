@@ -1,8 +1,17 @@
 import { Heart, Share2 } from "lucide-react";
-import { featuredPoem } from "@/data/poems";
+import { useFeaturedPoem } from "@/hooks/usePoems";
+import { Link } from "react-router-dom";
 
 const FeaturedPoem = () => {
-  const poem = featuredPoem;
+  const { data: poem, isLoading } = useFeaturedPoem();
+
+  if (isLoading || !poem) {
+    return (
+      <section className="max-w-6xl mx-auto px-4 py-12">
+        <div className="h-[280px] bg-muted rounded-2xl animate-pulse" />
+      </section>
+    );
+  }
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-12">
@@ -35,10 +44,13 @@ const FeaturedPoem = () => {
         <p className="text-primary-foreground/80 text-sm md:text-base max-w-lg mb-4">
           {poem.excerpt}
         </p>
-        <p className="text-primary-foreground/70 text-sm">— {poem.poet}</p>
-        <button className="mt-4 bg-card text-foreground px-5 py-2 rounded-full text-sm font-medium hover:bg-card/90 transition-colors w-fit">
+        <p className="text-primary-foreground/70 text-sm">— {poem.poets?.name || "Unknown"}</p>
+        <Link
+          to={`/poems/${poem.id}`}
+          className="mt-4 bg-card text-foreground px-5 py-2 rounded-full text-sm font-medium hover:bg-card/90 transition-colors w-fit"
+        >
           Read Full Poem
-        </button>
+        </Link>
       </div>
     </section>
   );
