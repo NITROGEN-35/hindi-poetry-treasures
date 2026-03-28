@@ -68,6 +68,7 @@ const LibraryPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

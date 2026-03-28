@@ -116,6 +116,7 @@ const PoemsPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

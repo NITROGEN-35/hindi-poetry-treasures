@@ -24,6 +24,7 @@ const Index = () => {
       <PoemSection title="Love & Romance" poems={lovePoems} isLoading={loveLoading} viewAllLink="/poems?category=Love" />
       <EditorPicks />
       <CategoryBrowse />
+      <Footer />
     </div>
   );
 };

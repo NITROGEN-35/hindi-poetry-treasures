@@ -90,6 +90,7 @@ const PoemDetailPage = () => {
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
