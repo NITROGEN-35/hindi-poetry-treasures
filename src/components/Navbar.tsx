@@ -1,7 +1,18 @@
-import { Home, FileText, Users, BookOpen, BookOpenText, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Home, FileText, Users, BookOpen, BookOpenText, User, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const Navbar = () => {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out successfully");
+    navigate("/");
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
@@ -34,13 +45,28 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <button className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <BookOpenText size={16} />
-            <span className="hidden sm:inline">Reading</span>
-          </button>
-          <button className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
-            <User size={16} />
-          </button>
+          {user ? (
+            <>
+              <span className="text-xs text-muted-foreground hidden sm:inline truncate max-w-[120px]">
+                {user.email}
+              </span>
+              <button
+                onClick={handleSignOut}
+                className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                title="Sign Out"
+              >
+                <LogOut size={16} />
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/auth"
+              className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <User size={16} />
+              <span className="hidden sm:inline">Sign In</span>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

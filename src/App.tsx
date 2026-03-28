@@ -27,6 +27,7 @@ const App = () => (
           <Route path="/poets" element={<PoetsPage />} />
           <Route path="/poets/:id" element={<PoetDetailPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
