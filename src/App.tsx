@@ -9,6 +9,7 @@ import PoemDetailPage from "./pages/PoemDetailPage.tsx";
 import PoetsPage from "./pages/PoetsPage.tsx";
 import PoetDetailPage from "./pages/PoetDetailPage.tsx";
 import LibraryPage from "./pages/LibraryPage.tsx";
+import AuthPage from "./pages/AuthPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
