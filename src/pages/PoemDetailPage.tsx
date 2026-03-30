@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { usePoem } from "@/hooks/usePoems";
 import { usePoemLike, useSavedPoem } from "@/hooks/usePoemActions";
 import { useAuth } from "@/hooks/useAuth";
+import { useReadingHistory } from "@/hooks/useReadingHistory";
 import { toast } from "sonner";
 
 const PoemDetailPage = () => {
