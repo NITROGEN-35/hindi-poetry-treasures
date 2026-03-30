@@ -11,6 +11,7 @@ import PoetDetailPage from "./pages/PoetDetailPage.tsx";
 import LibraryPage from "./pages/LibraryPage.tsx";
 import AuthPage from "./pages/AuthPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 
 const queryClient = new QueryClient();
 
