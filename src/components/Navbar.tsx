@@ -46,18 +46,13 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2">
           {user ? (
-            <>
-              <span className="text-xs text-muted-foreground hidden sm:inline truncate max-w-[120px]">
-                {user.email}
-              </span>
-              <button
-                onClick={handleSignOut}
-                className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                title="Sign Out"
-              >
-                <LogOut size={16} />
-              </button>
-            </>
+            <Link
+              to="/profile"
+              className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+              title="Profile"
+            >
+              <User size={16} />
+            </Link>
           ) : (
             <Link
               to="/auth"
