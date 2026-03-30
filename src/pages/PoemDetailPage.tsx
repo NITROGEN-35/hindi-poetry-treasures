@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { usePoem } from "@/hooks/usePoems";
 import { usePoemLike, useSavedPoem } from "@/hooks/usePoemActions";
 import { useAuth } from "@/hooks/useAuth";
+import { useReadingHistory } from "@/hooks/useReadingHistory";
 import { toast } from "sonner";
 
 const PoemDetailPage = () => {
@@ -13,6 +14,7 @@ const PoemDetailPage = () => {
   const { user } = useAuth();
   const { isLiked, toggleLike, isToggling: likeToggling } = usePoemLike(id || "");
   const { isSaved, toggleSave, isToggling: saveToggling } = useSavedPoem(id || "");
+  useReadingHistory(id);
 
   const handleLike = () => {
     if (!user) return toast.error("Please sign in to like poems");
