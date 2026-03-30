@@ -7,6 +7,7 @@ import CollectionSection from "@/components/CollectionSection";
 import PoemSection from "@/components/PoemSection";
 import EditorPicks from "@/components/EditorPicks";
 import CategoryBrowse from "@/components/CategoryBrowse";
+import ScrollReveal from "@/components/ScrollReveal";
 import { usePoems } from "@/hooks/usePoems";
 
 const Index = () => {
@@ -16,14 +17,30 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <PoemOfTheDay />
-      <FeaturedPoem />
-      <TrendingSection />
-      <CollectionSection />
-      <PoemSection title="Recently Added" poems={recentPoems} isLoading={recentLoading} viewAllLink="/poems?sort=recent" />
-      <PoemSection title="Love & Romance" poems={lovePoems} isLoading={loveLoading} viewAllLink="/poems?category=Love" />
-      <EditorPicks />
-      <CategoryBrowse />
+      <ScrollReveal>
+        <PoemOfTheDay />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <FeaturedPoem />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <TrendingSection />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <CollectionSection />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <PoemSection title="Recently Added" poems={recentPoems} isLoading={recentLoading} viewAllLink="/poems?sort=recent" />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <PoemSection title="Love & Romance" poems={lovePoems} isLoading={loveLoading} viewAllLink="/poems?category=Love" />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <EditorPicks />
+      </ScrollReveal>
+      <ScrollReveal delay={0.1}>
+        <CategoryBrowse />
+      </ScrollReveal>
       <Footer />
     </div>
   );

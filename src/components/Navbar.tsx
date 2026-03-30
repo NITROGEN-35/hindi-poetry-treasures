@@ -1,17 +1,9 @@
-import { Home, FileText, Users, BookOpen, BookOpenText, User, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Home, FileText, Users, BookOpen, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { toast } from "sonner";
 
 const Navbar = () => {
-  const { user, signOut } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSignOut = async () => {
-    await signOut();
-    toast.success("Signed out successfully");
-    navigate("/");
-  };
+  const { user } = useAuth();
 
   return (
     <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border">
@@ -46,18 +38,13 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2">
           {user ? (
-            <>
-              <span className="text-xs text-muted-foreground hidden sm:inline truncate max-w-[120px]">
-                {user.email}
-              </span>
-              <button
-                onClick={handleSignOut}
-                className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                title="Sign Out"
-              >
-                <LogOut size={16} />
-              </button>
-            </>
+            <Link
+              to="/profile"
+              className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+              title="Profile"
+            >
+              <User size={16} />
+            </Link>
           ) : (
             <Link
               to="/auth"
