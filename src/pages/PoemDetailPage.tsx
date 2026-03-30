@@ -14,6 +14,7 @@ const PoemDetailPage = () => {
   const { user } = useAuth();
   const { isLiked, toggleLike, isToggling: likeToggling } = usePoemLike(id || "");
   const { isSaved, toggleSave, isToggling: saveToggling } = useSavedPoem(id || "");
+  useReadingHistory(id);
 
   const handleLike = () => {
     if (!user) return toast.error("Please sign in to like poems");
