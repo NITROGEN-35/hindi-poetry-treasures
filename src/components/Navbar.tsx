@@ -1,7 +1,6 @@
 import { Home, FileText, Users, BookOpen, User } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { toast } from "sonner";
 
 const Navbar = () => {
   const { user } = useAuth();
