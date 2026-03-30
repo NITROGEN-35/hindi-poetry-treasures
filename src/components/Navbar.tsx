@@ -9,15 +9,16 @@ const Navbar = () => {
   const { user } = useAuth();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  // Ctrl+K / Cmd+K to open search
-  if (typeof window !== "undefined") {
-    window.addEventListener("keydown", (e) => {
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setSearchOpen(true);
       }
-    });
-  }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
 
   return (
     <>
