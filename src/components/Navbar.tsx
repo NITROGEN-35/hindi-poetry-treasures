@@ -15,6 +15,7 @@ const navItems = [
 
 const Navbar = () => {
   const { user } = useAuth();
+  const { data: isAdmin } = useIsAdmin();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
