@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Home, FileText, Users, BookOpen, User, Search, Menu, X } from "lucide-react";
+import { Home, FileText, Users, BookOpen, User, Search, Menu, X, Shield } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useIsAdmin } from "@/hooks/useAdmin";
 import SearchOverlay from "@/components/SearchOverlay";
 import ThemeToggle from "@/components/ThemeToggle";
 
