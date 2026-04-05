@@ -154,13 +154,24 @@ const Navbar = () => {
               <div className="my-3 border-t border-border" />
 
               {user ? (
-                <Link
-                  to="/profile"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-                >
-                  <User size={18} />
-                  <span>Profile</span>
-                </Link>
+                <>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-amber-600 hover:bg-amber-500/10 transition-colors"
+                    >
+                      <Shield size={18} />
+                      <span>Admin</span>
+                    </Link>
+                  )}
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  >
+                    <User size={18} />
+                    <span>Profile</span>
+                  </Link>
+                </>
               ) : (
                 <Link
                   to="/auth"
