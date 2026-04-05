@@ -53,11 +53,11 @@ export const useUpsertPoem = () => {
     mutationFn: async (poem: Record<string, any>) => {
       if (poem.id) {
         const { id, poets, ...rest } = poem;
-        const { error } = await supabase.from("poems").update(rest).eq("id", id);
+        const { error } = await supabase.from("poems").update(rest as any).eq("id", id);
         if (error) throw error;
       } else {
         const { poets, ...rest } = poem;
-        const { error } = await supabase.from("poems").insert(rest);
+        const { error } = await supabase.from("poems").insert(rest as any);
         if (error) throw error;
       }
     },
