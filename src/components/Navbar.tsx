@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Home, FileText, Users, BookOpen, User, Search, Menu, X } from "lucide-react";
+import { Home, FileText, Users, BookOpen, User, Search, Menu, X, Shield } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useIsAdmin } from "@/hooks/useAdmin";
 import SearchOverlay from "@/components/SearchOverlay";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -14,6 +15,7 @@ const navItems = [
 
 const Navbar = () => {
   const { user } = useAuth();
+  const { data: isAdmin } = useIsAdmin();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -86,13 +88,24 @@ const Navbar = () => {
             <ThemeToggle />
 
             {user ? (
-              <Link
-                to="/profile"
-                className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
-                title="Profile"
-              >
-                <User size={16} />
-              </Link>
+              <div className="flex items-center gap-2">
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors"
+                    title="Admin"
+                  >
+                    <Shield size={16} />
+                  </Link>
+                )}
+                <Link
+                  to="/profile"
+                  className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                  title="Profile"
+                >
+                  <User size={16} />
+                </Link>
+              </div>
             ) : (
               <Link
                 to="/auth"
@@ -141,13 +154,24 @@ const Navbar = () => {
               <div className="my-3 border-t border-border" />
 
               {user ? (
-                <Link
-                  to="/profile"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-                >
-                  <User size={18} />
-                  <span>Profile</span>
-                </Link>
+                <>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-amber-600 hover:bg-amber-500/10 transition-colors"
+                    >
+                      <Shield size={18} />
+                      <span>Admin</span>
+                    </Link>
+                  )}
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  >
+                    <User size={18} />
+                    <span>Profile</span>
+                  </Link>
+                </>
               ) : (
                 <Link
                   to="/auth"
