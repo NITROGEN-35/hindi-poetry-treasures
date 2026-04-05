@@ -88,13 +88,24 @@ const Navbar = () => {
             <ThemeToggle />
 
             {user ? (
-              <Link
-                to="/profile"
-                className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
-                title="Profile"
-              >
-                <User size={16} />
-              </Link>
+              <div className="flex items-center gap-2">
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors"
+                    title="Admin"
+                  >
+                    <Shield size={16} />
+                  </Link>
+                )}
+                <Link
+                  to="/profile"
+                  className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                  title="Profile"
+                >
+                  <User size={16} />
+                </Link>
+              </div>
             ) : (
               <Link
                 to="/auth"
